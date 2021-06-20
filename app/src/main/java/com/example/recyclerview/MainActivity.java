@@ -22,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<News> newsArrayList;
     MyAdapter myAdapter;
     String[] newsHeading;
+    String[] newsDetail;
     int[] imageResourceId;
 
     @Override
@@ -48,6 +49,19 @@ public class MainActivity extends AppCompatActivity {
                 "Homemaker, economist: Candidates from all walks of life in Bengal assembly"
         };
 
+        newsDetail = new String[]{
+               getString(R.string.new_1),
+               getString(R.string.new_2),
+               getString(R.string.new_3),
+               getString(R.string.new_4),
+               getString(R.string.new_5),
+               getString(R.string.new_6),
+               getString(R.string.new_7),
+               getString(R.string.new_8),
+               getString(R.string.new_9),
+               getString(R.string.new_10)
+        };
+
         imageResourceId = new int[]{
                 R.drawable.a,
                 R.drawable.b,
@@ -61,6 +75,8 @@ public class MainActivity extends AppCompatActivity {
                 R.drawable.j,
         };
 
+
+
         getData();
 
 
@@ -70,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
 
         for (int i=0;i<newsHeading.length;i++){
 
-            News news = new News(newsHeading[i],imageResourceId[i]);
+            News news = new News(newsHeading[i],newsDetail[i],imageResourceId[i]);
             newsArrayList.add(news);
 
         }
