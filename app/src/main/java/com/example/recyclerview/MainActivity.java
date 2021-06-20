@@ -12,6 +12,8 @@ import android.widget.Filterable;
 import android.widget.SearchView;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -32,10 +34,6 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
 
         newsArrayList = new ArrayList<News>();
-
-
-
-
 
         newsHeading = new String[]{
                 "Biden aims to expand vaccines for adults and children",
@@ -77,35 +75,11 @@ public class MainActivity extends AppCompatActivity {
 
         }
 
+        
         myAdapter = new MyAdapter(this,newsArrayList);
         recyclerView.setAdapter(myAdapter);
         myAdapter.notifyDataSetChanged();
 
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-
-        getMenuInflater().inflate(R.menu.menu_item,menu);
-        MenuItem menuItem = menu.findItem(R.id.search_action);
-        SearchView searchView = (SearchView) menuItem.getActionView();
-        searchView.setMaxWidth(Integer.MAX_VALUE);
-        searchView.setQueryHint("Search Here!");
-
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-
-                myAdapter.getFilter().filter(newText);
-                return false;
-            }
-        });
-
-        return super.onCreateOptionsMenu(menu);
-    }
 }

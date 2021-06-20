@@ -15,16 +15,15 @@ import com.google.android.material.imageview.ShapeableImageView;
 
 import java.util.ArrayList;
 
-public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> implements Filterable  {
+public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
     Context context;
     ArrayList<News> newsArrayList;
-    ArrayList<News> newsArrayListFull;
 
     public MyAdapter(Context context, ArrayList<News> newsArrayList) {
         this.context = context;
-        this.newsArrayListFull = newsArrayList;
-        this.newsArrayList = new ArrayList<>(newsArrayListFull);
+        this.newsArrayList = newsArrayList;
+
     }
 
     @NonNull
@@ -51,50 +50,6 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> impl
         return newsArrayList.size();
     }
 
-    @Override
-    public Filter getFilter() {
-        return newsFilter;
-    }
-
-    private final Filter newsFilter = new Filter() {
-        @Override
-        protected FilterResults performFiltering(CharSequence constraint) {
-
-            ArrayList<News> filteredNewsList = new ArrayList<>();
-
-            if (constraint == null || constraint.length() == 0){
-
-                filteredNewsList.addAll(newsArrayListFull);
-
-            }else {
-
-                String filterPattern = constraint.toString().toLowerCase().trim();
-
-                for (News news : newsArrayListFull){
-
-                    if (news.heading.toLowerCase().contains(filterPattern))
-                        filteredNewsList.add(news);
-
-                }
-
-            }
-
-            FilterResults results = new FilterResults();
-            results.values = filteredNewsList;
-            results.count = filteredNewsList.size();
-            return results;
-
-        }
-
-        @Override
-        protected void publishResults(CharSequence constraint, FilterResults results) {
-
-
-            newsArrayList.clear();
-            newsArrayList.addAll((ArrayList)results.values);
-            notifyDataSetChanged();
-        }
-    };
 
     public static class MyViewHolder extends RecyclerView.ViewHolder{
 
